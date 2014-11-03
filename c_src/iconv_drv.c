@@ -278,7 +278,7 @@ static void iv_close(t_iconvdrv *iv, iconv_t cd)
     return;
 }
 
-static void iconvdrv_from_erlang(ErlDrvData drv_data, char *buf, int len)
+static void iconvdrv_from_erlang(ErlDrvData drv_data, char *buf, ErlDrvSizeT len)
 {
     t_iconvdrv *iv = (t_iconvdrv *) drv_data;
     char ignore = 0;
@@ -367,5 +367,8 @@ DRIVER_INIT(iconvdrv)
   iconvdrv_driver_entry.driver_name  = "iconv_drv";
   iconvdrv_driver_entry.finish       = NULL;
   iconvdrv_driver_entry.outputv      = NULL;
+  iconvdrv_driver_entry.extended_marker = ERL_DRV_EXTENDED_MARKER;
+  iconvdrv_driver_entry.major_version = ERL_DRV_EXTENDED_MAJOR_VERSION;
+  iconvdrv_driver_entry.minor_version = ERL_DRV_EXTENDED_MINOR_VERSION;
   return &iconvdrv_driver_entry;
 }
